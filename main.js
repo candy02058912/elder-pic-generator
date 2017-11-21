@@ -13,7 +13,8 @@ function downloadImage(img) {
 
 imageObj.onload = function() {
   ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
-  ctx.font = "100pt sans-serif";
+  ctx.font = "80pt sans-serif";
+  ctx.lineWidth = 3;
   ctx.fillStyle = 'white';
   ctx.fillText('測試', 100, 100);
   ctx.strokeStyle = 'black';
