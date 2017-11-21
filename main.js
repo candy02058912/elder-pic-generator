@@ -11,16 +11,23 @@ function downloadImage(img) {
   document.body.removeChild(a);
 }
 
-imageObj.onload = function() {
-  ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
-  ctx.font = "80pt sans-serif";
-  ctx.lineWidth = 3;
-  ctx.fillStyle = 'white';
-  ctx.fillText('測試', 100, 100);
-  ctx.strokeStyle = 'black';
-  ctx.strokeText('測試', 100, 100);
-  var savedImg = canvas.toDataURL();
+function drawImage(text) {
+  imageObj.onload = function() {
+    ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
+    ctx.font = "80pt sans-serif";
+    ctx.lineWidth = 3;
+    ctx.fillStyle = 'white';
+    ctx.fillText(text, 100, 100);
+    ctx.strokeStyle = 'black';
+    ctx.strokeText(text, 100, 100);
+  };
+  imageObj.src = "test.jpg";
+}
 
-};
 
-imageObj.src = "test.jpg";
+document.querySelector('#bottom-text').addEventListener('keyup', function() {
+  console.log(this.value);
+  drawImage(this.value);
+});
+
+drawImage('');
