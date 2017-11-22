@@ -1,0 +1,7 @@
+.dragndrop {
+    width: 50vw;
+    height: 300px;
+    background-color: skyblue;
+    background-clip: padding-box;
+    border: 3px  dashed darkblue;
+}

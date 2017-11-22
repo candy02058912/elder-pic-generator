@@ -13,6 +13,8 @@ function downloadImage(img) {
 
 function drawImage(text) {
   imageObj.onload = function() {
+    canvas.width = imageObj.width;
+    canvas.height = imageObj.height;
     ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
     ctx.font = "80pt sans-serif";
     ctx.lineWidth = 3;
@@ -31,3 +33,9 @@ document.querySelector('#bottom-text').addEventListener('keyup', function() {
 });
 
 drawImage('');
+
+
+var imageFile = document.querySelector('#image-file');
+imageFile.addEventListener('change', function() {
+  console.log('image dropped');
+});
