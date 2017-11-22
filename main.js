@@ -2,6 +2,7 @@ var canvas = document.querySelector('#canvas');
 var ctx = canvas.getContext("2d");
 var imageObj = new Image();
 var maxWidth = 500;
+var img;
 
 function downloadImage(img) {
   var a = document.createElement('a');
@@ -12,7 +13,7 @@ function downloadImage(img) {
   document.body.removeChild(a);
 }
 
-function drawImage(text) {
+function drawImage(img, text) {
   imageObj.onload = function() {
     imgWidth = imageObj.width;
     imgHeight = imageObj.height;
@@ -30,12 +31,12 @@ function drawImage(text) {
     ctx.strokeStyle = 'black';
     ctx.strokeText(text, 100, 100);
   };
-  imageObj.src = "test.jpg";
+  imageObj.src = img;
 }
 
 
 document.querySelector('#bottom-text').addEventListener('input', function() {
-  drawImage(this.value);
+  drawImage(img, this.value);
 });
 
 drawImage('');
@@ -46,33 +47,22 @@ imageLoader.addEventListener('change', handleImage, false);
 function handleImage(e) {
 var reader = new FileReader();
 reader.onload = function (event) {
-    var img = event.target.result;
+  img = event.target.result;
+  drawImage(event.target.result, '');
 }
 reader.readAsDataURL(e.target.files[0]);
 
 }
 
 var dropbox = document.querySelector('#drop-box');
-dropbox.addEventListener("dragenter", dragenter, false);
-dropbox.addEventListener("dragover", dragover, false);
-dropbox.addEventListener("dragleave", dragleave, false);
+dropbox.addEventListener("dragenter", stopEvents, false);
+dropbox.addEventListener("dragover", stopEvents, false);
+dropbox.addEventListener("dragleave", stopEvents, false);
 dropbox.addEventListener("drop", drop, false);
-function dragenter(e) {
-  e.stopPropagation();
-  e.preventDefault();
-  console.log('enter');
-}
 
-function dragleave(e) {
+function stopEvents(e) {
   e.stopPropagation();
   e.preventDefault();
-  console.log('leave');
-}
-
-function dragover(e) {
-  e.stopPropagation();
-  e.preventDefault();
-  console.log('over');
 }
 
 function drop(e) {
